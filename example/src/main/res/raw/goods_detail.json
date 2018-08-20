@@ -1,0 +1,55 @@
+{
+  "code": 0,
+  "message": "OK",
+  "data": {
+    "content": "内容描述",
+    "banners": [
+      "https://i8.mifile.cn/v1/a1/334f3a68-eb80-e730-8733-48f86062cf0e.webp",
+      "https://i8.mifile.cn/v1/a1/2e34feca-9c9c-e5ff-dc39-eaac973df095.webp",
+      "https://i8.mifile.cn/v1/a1/3bf6304b-f207-a136-c763-82205f53349a.webp"
+    ],
+    "tabs": [
+      {
+        "name": "内容详情",
+        "pictures": [
+          "https://i8.mifile.cn/v1/a1/61508883-814d-1427-43d5-5cf33202e8cc.webp",
+          "https://i8.mifile.cn/v1/a1/3ed519e6-fdae-2b65-81df-1d4c0258953f.webp",
+          "https://i8.mifile.cn/v1/a1/1d682a87-1788-cec8-f222-a8534978990c.webp",
+          "https://i8.mifile.cn/v1/a1/e8ebd002-3778-ab4f-fb94-67c8bec61c69.webp"
+        ]
+      },
+      {
+        "name": "内容参数",
+        "pictures": [
+          "https://i8.mifile.cn/v1/a1/61508883-814d-1427-43d5-5cf33202e8cc.webp",
+          "https://i8.mifile.cn/v1/a1/3ed519e6-fdae-2b65-81df-1d4c0258953f.webp",
+          "https://i8.mifile.cn/v1/a1/1d682a87-1788-cec8-f222-a8534978990c.webp",
+          "https://i8.mifile.cn/v1/a1/e8ebd002-3778-ab4f-fb94-67c8bec61c69.webp",
+          "https://i8.mifile.cn/v1/a1/61508883-814d-1427-43d5-5cf33202e8cc.webp",
+          "https://i8.mifile.cn/v1/a1/3ed519e6-fdae-2b65-81df-1d4c0258953f.webp",
+          "https://i8.mifile.cn/v1/a1/1d682a87-1788-cec8-f222-a8534978990c.webp",
+          "https://i8.mifile.cn/v1/a1/e8ebd002-3778-ab4f-fb94-67c8bec61c69.webp",
+          "https://i8.mifile.cn/v1/a1/61508883-814d-1427-43d5-5cf33202e8cc.webp",
+          "https://i8.mifile.cn/v1/a1/3ed519e6-fdae-2b65-81df-1d4c0258953f.webp",
+          "https://i8.mifile.cn/v1/a1/1d682a87-1788-cec8-f222-a8534978990c.webp",
+          "https://i8.mifile.cn/v1/a1/e8ebd002-3778-ab4f-fb94-67c8bec61c69.webp",
+          "https://i8.mifile.cn/v1/a1/61508883-814d-1427-43d5-5cf33202e8cc.webp",
+          "https://i8.mifile.cn/v1/a1/3ed519e6-fdae-2b65-81df-1d4c0258953f.webp",
+          "https://i8.mifile.cn/v1/a1/1d682a87-1788-cec8-f222-a8534978990c.webp",
+          "https://i8.mifile.cn/v1/a1/e8ebd002-3778-ab4f-fb94-67c8bec61c69.webp",
+          "https://i8.mifile.cn/v1/a1/61508883-814d-1427-43d5-5cf33202e8cc.webp",
+          "https://i8.mifile.cn/v1/a1/3ed519e6-fdae-2b65-81df-1d4c0258953f.webp",
+          "https://i8.mifile.cn/v1/a1/1d682a87-1788-cec8-f222-a8534978990c.webp",
+          "https://i8.mifile.cn/v1/a1/e8ebd002-3778-ab4f-fb94-67c8bec61c69.webp"
+        ]
+      }
+    ],
+    "specification":"规格参数",
+    "inventory":"商品中包含的清单",
+    "id":1,
+    "name":"小米Sc 6GB+64G 白色",
+    "description":"搭载配置 八核高性能处理器 / '无敌'相机 / 135g 轻薄机身 / 5.1s 高亮护眼屏幕",
+    "price":1200.00,
+    "thumb":"http://i9.qhimg.com/t017d891ca365ef60b5.jpg"
+  }
+}

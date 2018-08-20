@@ -1,0 +1,68 @@
+{
+  "code":0,
+  "message":"OK",
+  "data":[
+    {
+      "id":1,
+      "section":"标题1",
+      "goods":[
+        {
+          "goods_id":3,
+          "goods_thumb":"http://m.360buyimg.com/mobilecms/s1125x690_jfs/t23740/124/892945857/90035/a0ce940a/5b472a8dN100222dc.jpg!cr_1125x549_0_72!q70.jpg",
+          "goods_name":"品牌1"
+        },
+        {
+          "goods_id":4,
+          "goods_thumb":"http://m.360buyimg.com/mobilecms/s1125x690_jfs/t23740/124/892945857/90035/a0ce940a/5b472a8dN100222dc.jpg!cr_1125x549_0_72!q70.jpg",
+          "goods_name":"品牌2"
+        },{
+          "goods_id":5,
+          "goods_thumb":"http://m.360buyimg.com/mobilecms/s1125x690_jfs/t23740/124/892945857/90035/a0ce940a/5b472a8dN100222dc.jpg!cr_1125x549_0_72!q70.jpg",
+          "goods_name":"品牌3"
+        },{
+          "goods_id":6,
+          "goods_thumb":"http://m.360buyimg.com/mobilecms/s1125x690_jfs/t23740/124/892945857/90035/a0ce940a/5b472a8dN100222dc.jpg!cr_1125x549_0_72!q70.jpg",
+          "goods_name":"品牌4"
+        }
+      ]
+
+    },
+    {
+      "id":2,
+      "section":"标题2",
+      "goods":[
+        {
+          "goods_id":3,
+          "goods_thumb":"http://m.360buyimg.com/mobilecms/s1125x690_jfs/t23740/124/892945857/90035/a0ce940a/5b472a8dN100222dc.jpg!cr_1125x549_0_72!q70.jpg",
+          "goods_name":"品牌1"
+        },
+        {
+          "goods_id":4,
+          "goods_thumb":"http://m.360buyimg.com/mobilecms/s1125x690_jfs/t23740/124/892945857/90035/a0ce940a/5b472a8dN100222dc.jpg!cr_1125x549_0_72!q70.jpg",
+          "goods_name":"品牌2"
+        },{
+          "goods_id":5,
+          "goods_thumb":"http://m.360buyimg.com/mobilecms/s1125x690_jfs/t23740/124/892945857/90035/a0ce940a/5b472a8dN100222dc.jpg!cr_1125x549_0_72!q70.jpg",
+          "goods_name":"品牌3"
+        },{
+          "goods_id":6,
+          "goods_thumb":"http://m.360buyimg.com/mobilecms/s1125x690_jfs/t23740/124/892945857/90035/a0ce940a/5b472a8dN100222dc.jpg!cr_1125x549_0_72!q70.jpg",
+          "goods_name":"品牌4"
+        },{
+          "goods_id":7,
+          "goods_thumb":"http://m.360buyimg.com/mobilecms/s1125x690_jfs/t23740/124/892945857/90035/a0ce940a/5b472a8dN100222dc.jpg!cr_1125x549_0_72!q70.jpg",
+          "goods_name":"品牌5"
+        },{
+          "goods_id":8,
+          "goods_thumb":"http://m.360buyimg.com/mobilecms/s1125x690_jfs/t23740/124/892945857/90035/a0ce940a/5b472a8dN100222dc.jpg!cr_1125x549_0_72!q70.jpg",
+          "goods_name":"品牌6"
+        }
+      ]
+    }
+
+
+
+  ]
+
+
+}

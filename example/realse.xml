@@ -1,0 +1,25 @@
+<release>
+  <realse>
+    <realseCode>10</realseCode>
+    <versionName>1.0.0</versionName>
+    <versionInfo>this is 10,fix A bug</versionInfo>
+  </realse>
+  <release>
+    <realseCode>11</realseCode>
+    <versionName>1.0.1</versionName>
+    <versionInfo>this is 11,fix B bug</versionInfo>
+  </release>
+
+
+<release>
+  <realseCode>12</realseCode>
+  <versionName>1.0.2</versionName>
+  <versionInfo>this is 11,fix C bug</versionInfo>
+</release>
+
+<release>
+  <versionCode>13</versionCode>
+  <versionName />
+  <versionInfo>this is 11,fix D bug</versionInfo>
+</release>
+</release>

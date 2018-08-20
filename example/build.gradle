@@ -1,0 +1,432 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.mob.sdk'
+
+
+apply plugin: 'gradle-study'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion '27.0.3'
+    defaultConfig {
+        applicationId "com.skcodestack.fastec"
+        minSdkVersion 16
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders = [UMENG_CHANNEL_VALUE: "sk"]
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a'
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
+        }
+
+        manifestPlaceholders = [
+                JPUSH_PKGNAME: applicationId,
+                JPUSH_APPKEY : "8c34ac2abaffca9fd0bf5ac5", //JPush上注册的包名对应的appkey.
+                JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
+        ]
+    }
+
+    signingConfigs {
+
+        debug {}
+
+        release {
+            storeFile file("fastec.jks")
+            storePassword "123456"
+            keyAlias "skcodestack"
+            keyPassword "123456"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+
+            //指定我们release包的输出文件名就是我们的渠道名字
+            applicationVariants.all { variant ->
+                variant.outputs.all { output ->
+
+                    if (!variant.buildType.isDebuggable()) {
+                        //获取签名的名字 variant.signingConfig.name
+                        //要被替换的源字符串
+                        def sourceFile = this.project.name+"-${variant.flavorName}-${variant.buildType.name}"
+                        //替换的字符串
+                        def replaceFile = "${variant.productFlavors[0].name}"+"_V${variant.versionName}_${variant.flavorName}_${variant.buildType.name}"
+                        outputFileName = output.outputFile.name.replace(sourceFile, replaceFile);
+                        //遗留问题：如何获取当前module的name，如CodeBooke这个名字怎么获取到
+                    }
+//                    def outputFile = output.outputFile
+//                    if (outputFile != null && outputFile.name.endsWith(".apk")) {
+//
+//                        def fileName = "${variant.productFlavors[0].name}" + ".apk"
+//                        outputFileName = new File(outputFile.parent, fileName);
+//                    }
+                }
+            }
+        }
+    }
+    flavorDimensions "default"
+    productFlavors {
+        sk {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "sk"]
+//            resValue("string","name","sk")
+//            applicationId
+//            applicationIdSuffix
+            dimension "default"
+        }
+
+        googlePlayer {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "googlePlayer"]
+//            resValue("string","name","googlePlayer")
+            dimension "default"
+        }
+        baidu {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "baidu"]
+//            resValue("string","name","baidu")
+            dimension "default"
+        }
+
+        productFlavors.all {
+            flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+        }
+    }
+
+    dexOptions {
+        preDexLibraries = false
+    }
+    lintOptions {
+        abortOnError false
+        lintConfig file("lint.xml")
+    }
+
+    sourceSets {
+        main {
+            //修改so位置
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+//    sourceSets{
+//        main{
+//            添加资源文件
+//            res.srcDirs = ['src/main/res','src/main/res-mod']
+//        }
+//    }
+
+}
+
+MobSDK {
+    appKey "27021f2249a30"
+    appSecret "f255b72faf6580ac3b1b3fb2d7b770e8"
+    SMSSDK {}
+    ShareSDK {
+        devInfo {
+            SinaWeibo {
+                appKey "568898243"
+                appSecret "38a4f8204cc784f81f9f0daaf31e02e3"
+                callbackUri "http://www.sharesdk.cn"
+                shareByAppClient true
+            }
+            Wechat {
+                appId "wx4868b35061f87885"
+                appSecret "64020361b8ec4c99936c0e3999a9f249"
+                userName "gh_afb25ac019c9"
+                path "pages/index/index.html?id=1"
+                withShareTicket true
+                miniprogramType 2
+                bypassApproval false
+            }
+        }
+    }
+}
+
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    testCompile 'junit:junit:4.12'
+    compile project(':lib-ec')
+    annotationProcessor project(':lib_compiler')
+    compile 'com.android.support:multidex:1.0.0'
+    compile 'com.facebook.stetho:stetho:1.3.1'
+    compile 'com.facebook.stetho:stetho-okhttp3:1.3.1'
+    compile 'cn.jiguang.sdk:jpush:3.0.1'
+    compile 'cn.jiguang.sdk:jcore:1.1.0'
+//    注意：统计SDK必须依赖基础组件库。所以需要加入对应依赖:
+    compile 'com.umeng.sdk:common:1.5.0'
+    compile 'com.umeng.sdk:analytics:7.5.0'
+}
+
+//umeng
+
+//外部命令
+task apkcopy {
+    //gradle执行阶段
+    doLast {
+        def sourcePath = this.buildDir.path + '/outputs/apk'
+        def destPath = 'D:/itcast/' + this.getRootProject().name + "_" + this.getProject().name + "/"
+//        def command = "mv -f ${sourcePath} ${destPath}"
+//
+//        exec {
+//            try {
+//                executable 'bash'
+//                args '-c', command
+//                commandLine "dfdf"
+//                println "the command is success"
+//            } catch (GradleException ex) {
+//                println "the command is error:${ex.toString()}"
+//            }
+//        }
+        copy {
+            from sourcePath
+            into destPath
+        }
+    }
+}
+
+//this.tasks.create('hellow'){
+//    setGroup("com.fastEc")
+//}
+
+//查找
+//this.getTasks();
+
+
+task hellow {
+    //task 之前
+    doFirst {
+
+    }
+    //task 之后
+    doLast {
+
+    }
+
+}
+
+//hellow.doFirst{
+//}
+
+
+def startBuildTime, endBuildTime
+
+this.afterEvaluate { project ->
+    //配置完毕
+    def preBuildTask = project.tasks.getByName('preBuild')
+    preBuildTask.doFirst {
+        startBuildTime = System.currentTimeMillis()
+        println "the start time :${startBuildTime}"
+    }
+
+
+    def doBuildTask = project.tasks.getByName('build')
+    doBuildTask.doLast {
+        endBuildTime = System.currentTimeMillis()
+        println "the end time :${endBuildTime}"
+    }
+}
+
+
+task taskA {
+    doLast {
+        println "task A"
+    }
+}
+
+task taskB {
+    doLast {
+        println "task B"
+    }
+}
+
+// << 等同 doLast
+task lib1 << {
+    println "lib1 1"
+}
+
+task lib2 << {
+    println "lib2 2"
+}
+
+task lib3 {
+    doLast {
+        println "lib3 3"
+    }
+}
+
+task nolib << {
+    println "nolib"
+}
+
+//依赖
+//1.[静态]task taskC(dependsOn: [taskA, taskB])
+//2.[动态]dependsOn lib1,lib2,lib3
+task taskC {
+    dependsOn this.tasks.findAll { task ->
+        return task.name.startsWith('lib')
+    }
+    doLast {
+        println "task C"
+    }
+}
+
+
+task handleRealseFile {
+
+//    def srcFile = file('realse.xml')
+//    def destDir = new File(this.buildDir,'generated/realse/')
+//
+//    doLast{
+//        println 'starting parse realse.xml'
+//        destDir.mkdir()
+//        def parser =  new XmlParser().parse(src)
+//        parser.realse.each{
+//            node->
+//                def name = node.text()
+//                def versionCode = node.version.text()
+//        }
+//    }
+}
+
+
+ext {
+    versionName = '1.0.2'
+    versionCode = '12'
+    versionInfo = 'this is 11,fix C bug'
+    destFile = file('realse.xml')
+    if (destFile != null && !destFile.exists()) {
+        destFile.createNewFile()
+    }
+}
+
+import groovy.xml.MarkupBuilder
+
+task writeTask {
+
+    inputs.property('versionCode', this.versionCode)
+    inputs.property('versionName', this.versionName)
+    inputs.property('versionInfo', this.versionInfo)
+
+    outputs.file this.destFile
+
+    doLast {
+        def data = inputs.getProperties()
+        File file = outputs.getFiles().getSingleFile()
+        //map --> entity
+        def versionMsg = new VersionMsg(data)
+        def sw = new StringWriter()
+        def xmlBuild = new MarkupBuilder(sw)
+        if (file.text != null && file.size() <= 0) {
+            xmlBuild.release {
+                realse {
+                    realseCode(versionMsg.versionCode)
+                    versionName(versionMsg.versionName)
+                    versionInfo(versionMsg.versionInfo)
+                }
+            }
+            file.withWriter { writer ->
+                writer.append(sw.toString())
+            }
+        } else {
+            xmlBuild.release {
+                realseCode(versionMsg.versionCode)
+                versionName(versionMsg.versionName)
+                versionInfo(versionMsg.versionInfo)
+            }
+            def lines = file.readLines()
+            def lengths = lines.size() - 1
+
+            file.withWriter { writer ->
+                lines.eachWithIndex { String entry, int i ->
+                    if (i != lengths) {
+                        writer.append(entry + '\r\n')
+                    } else if (i == lengths) {
+                        writer.append('\r\r\n' + sw.toString() + '\r\n')
+                        writer.append(entry)
+                    }
+
+                }
+            }
+        }
+    }
+}
+
+class VersionMsg {
+    String versionCode
+    String versionName
+    String versionInfo
+}
+
+task readTask {
+    inputs.file this.destFile
+    doLast {
+        def file = inputs.files.singleFile
+        println file.text
+    }
+}
+
+/**
+ * writeTask -- > readTask
+ */
+
+task testTask {
+    dependsOn writeTask, readTask
+    doLast {
+        println '测试task执行'
+    }
+}
+
+/**
+ * task 执行顺序
+ * 1.依赖
+ * 2.输入输出
+ * 3.mustRunAfter
+ */
+task test2Task {
+    mustRunAfter writeTask, readTask
+    doLast {
+        println '测试task执行'
+    }
+}
+//运行 gradlew test2Task,writeTask,readTask
+
+//task 类型
+//DefaultTask
+
+/************sourceSet***********/
+
+/****plugin-- extention*****/
+
+studyRealseinfo {
+    versionCode = rootProject.ext.android.versionCode
+    versionName = rootProject.ext.android.versionNamel
+    versionInfo = rootProject.ext.android.versionInfo
+    fileName = 'realse.xml'
+}
+
+/***********android plugin 扩展**************/
+//BaseExtension.java
+
+this.afterEvaluate {
+
+    //变体
+    this.android.applicationVariants.all {
+        variants ->
+            def name = variants.name
+            def baseName = variants.baseName
+
+            def checkManifestTask = variants.checkManifest
+
+    }
+
+}
+
+

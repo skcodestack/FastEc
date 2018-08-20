@@ -1,0 +1,126 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.jakewharton.butterknife'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion '27.0.3'
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    lintOptions {
+        abortOnError false
+    }
+
+}
+
+//为应用程序添加依赖
+dependencies {
+    //文件夹
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    //Android Support包
+    compile 'com.android.support:support-v4:25.3.1'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:design:25.3.1'
+    compile 'com.android.support:cardview-v7:25.3.1'
+    compile 'com.android.support:multidex:1.0.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
+    compile project(':lib_annotations')
+
+    //网络请求依赖
+    compile 'com.squareup.okio:okio:1.13.0'
+    compile 'com.squareup.okhttp3:okhttp:3.8.1'
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.squareup.retrofit2:converter-scalars:2.3.0'
+    //loading
+    compile 'com.wang.avi:library:2.1.3'
+    compile'com.nineoldandroids:library:2.4.0'
+    //fragmentation
+    compile 'me.yokeyword:fragmentation:1.3.5'
+    compile 'me.yokeyword:fragmentation-swipeback:1.3.5'
+    //butterknife
+    compile 'com.jakewharton:butterknife:8.5.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+    //字体图标
+    compile 'com.joanzapata.iconify:android-iconify-ionicons:2.2.2'
+    compile 'com.joanzapata.iconify:android-iconify-fontawesome:2.2.2'
+    //fastjson
+    compile 'com.alibaba:fastjson:1.1.57.android'
+    //数据库依赖
+    compile 'org.greenrobot:greendao-generator:3.0.0'
+    compile 'org.greenrobot:greendao:3.0.1'
+    //Log
+    compile 'com.orhanobut:logger:2.1.1'
+    //微信
+    compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
+    //RecyclerView依赖
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'
+    //RecyclerView 分割线
+    compile 'com.choices.divider:RecyclerView_Divider:1.0.0'
+    //banner
+//    compile 'com.bigkoo:convenientbanner:2.0.5'
+    compile 'com.bigkoo:ConvenientBanner:2.1.4'
+    compile 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
+    //图片处理
+    compile 'com.github.bumptech.glide:glide:4.0.0-RC0'
+    compile 'com.github.bumptech.glide:okhttp3-integration:4.0.0-RC0@aar'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0-RC0'
+    //沉浸式状态栏
+    compile 'com.github.niorgai:StatusBarCompat:2.1.3'
+    //Google AutoValue
+    provided 'com.google.auto.value:auto-value:1.4.1'
+    annotationProcessor "com.google.auto.value:auto-value:1.4.1"
+    //图片裁剪
+    compile 'com.github.yalantis:ucrop:2.2.1-native'
+    //动态权限处理
+    compile 'github.skcodestack:stonepermissionlib:1.0.4'
+    //工具包
+    compile 'com.blankj:utilcode:1.7.1'
+    //二维码
+    compile 'me.dm7.barcodescanner:zbar:1.9.8'
+    //View动画依赖
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.daimajia.easing:library:1.0.1@aar'
+    compile 'com.daimajia.androidanimations:library:1.1.3@aar'
+    //rx
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    compile 'io.reactivex.rxjava2:rxjava:2.1.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+
+    //依赖冲突排除
+//    compile ('com.orhanobut:logger:2.1.1'){
+//        排除
+//        exclude model:'support-v4'
+//        exclude group:'com.android.support'
+        //是否支持传递依赖，高版本不需要，有impliment
+//        transitive true
+//    }
+
+    //provided  编译时有效，打包运行时不参与
+    //1.只是在编译器生成类 tinker
+    //2.主工程已经compile，库工程不需要compile,可以使用provided,运行时使用父工程的库
+//    provided("dfdfdfdf") {
+        //每次从服务器拉取
+//        changing = true
+//    }
+
+}
+
+

@@ -1,0 +1,93 @@
+{
+  "code":0,
+  "message":"OK",
+  "total":100,
+  "page_size":6,
+  "data":[
+    {
+      "goodsId":1,
+      "text":"商品描述1",
+      "imageUrl":"http://m.360buyimg.com/mobilecms/s1125x690_jfs/t23740/124/892945857/90035/a0ce940a/5b472a8dN100222dc.jpg",
+      "spanSize":4
+    },
+    {
+      "goodsId":2,
+      "text":"商品描述2",
+      "imageUrl":"https://img14.360buyimg.com/n0/jfs/t21415/332/642302956/189613/778f2021/5b13cd6cN8e12d4aa.jpg",
+      "spanSize":2
+    },
+    {
+      "goodsId":3,
+      "text":"商品描述3",
+      "imageUrl":"http://img14.360buyimg.com/n7/jfs/t22780/255/725862068/475063/74adc391/5b403a86N13615760.jpg",
+      "spanSize":2
+
+    },
+    {
+      "goodsId":4,
+      "text":"商品描述4",
+      "imageUrl":"https://img14.360buyimg.com/n0/jfs/t20374/284/964669505/226708/64c25d5d/5b1cf306Nb71f2f7f.jpg",
+      "spanSize":2
+
+    },
+    {
+      "goodsId":5,
+      "text":"商品描述5",
+      "imageUrl":"https://img14.360buyimg.com/n0/jfs/t7297/154/3413903491/65679/45ae4902/59e42830N9da56c41.jpg",
+      "spanSize":2
+
+    },
+    {
+      "goodsId":6,
+      "text":"我是广告",
+      "spanSize":4
+
+    },
+    {
+      "goodsId":7,
+      "text":"商品描述6",
+      "imageUrl":"https://img14.360buyimg.com/n0/jfs/t20374/284/964669505/226708/64c25d5d/5b1cf306Nb71f2f7f.jpg",
+      "spanSize":2
+
+    },
+    {
+      "goodsId":8,
+      "text":"商品描述7",
+      "imageUrl":"https://img14.360buyimg.com/n0/jfs/t7297/154/3413903491/65679/45ae4902/59e42830N9da56c41.jpg",
+      "spanSize":2
+
+    },
+    {
+      "goodsId":9,
+      "imageUrl":"http://m.360buyimg.com/mobilecms/s1125x690_jfs/t23740/124/892945857/90035/a0ce940a/5b472a8dN100222dc.jpg",
+      "spanSize":4
+    },
+    {
+      "goodsId":10,
+      "text":"商品描述10",
+      "imageUrl":"https://img14.360buyimg.com/n0/jfs/t21415/332/642302956/189613/778f2021/5b13cd6cN8e12d4aa.jpg",
+      "spanSize":2
+    },
+    {
+      "goodsId":11,
+      "text":"商品描述11",
+      "imageUrl":"http://img14.360buyimg.com/n7/jfs/t22780/255/725862068/475063/74adc391/5b403a86N13615760.jpg",
+      "spanSize":2
+
+    },
+    {
+      "goodsId":12,
+      "text":"商品描述12",
+      "imageUrl":"https://img14.360buyimg.com/n0/jfs/t20374/284/964669505/226708/64c25d5d/5b1cf306Nb71f2f7f.jpg",
+      "spanSize":2
+
+    },
+    {
+      "goodsId":13,
+      "text":"商品描述13",
+      "imageUrl":"https://img14.360buyimg.com/n0/jfs/t7297/154/3413903491/65679/45ae4902/59e42830N9da56c41.jpg",
+      "spanSize":2
+
+    }
+  ]
+}

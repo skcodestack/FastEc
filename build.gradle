@@ -1,0 +1,282 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        jcenter()
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
+//        maven {
+//            //plugin 所在的仓库
+//            //这里是发布在本地文件夹了
+//            url uri('./plugin')
+//        }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.4'
+        classpath 'com.jakewharton:butterknife-gradle-plugin:8.5.1'
+        classpath 'org.greenrobot:greendao-gradle-plugin:3.0.0'
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+        // 注册MobSDK
+        classpath 'com.mob.sdk:MobSDK:2018.0319.1724'
+        //引入plugin
+//        classpath 'com.skcodestack.plugin:gradle-study:1.0'
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+
+apply from :this.file('common.gradle')
+
+
+
+///*******************生命周期***************************/
+////配置阶段开始前执行
+//this.beforeEvaluate {
+//    println "配置阶段开始前执行"
+//}
+//
+////配置阶段完成执行
+//this.afterEvaluate {
+//    println "配置阶段完成执行"
+//}
+//
+////gradle生命周期完毕执行
+//this.gradle.buildFinished {
+//    println "完毕执行"
+//
+//}
+//
+////等同afterEvaluate
+//this.gradle.beforeProject {
+//
+//}
+////等同afterEvaluate
+//this.gradle.afterProject {
+//
+//}
+//
+///**********************project*************************/
+//
+////获取所有的prject
+////this.getAllprojects()
+////得到所有的子project
+////this.getSubprojects()
+//
+//
+//def getProjects() {
+//    println "----------------"
+//    println "root project"
+//    println "----------------"
+//
+//    this.getAllprojects().eachWithIndex {
+//        item, index ->
+//            if (index == 0) {
+//                println "root prject :${item.name}"
+//            } else {
+//                println "other project: ${item.name}"
+//            }
+//    }
+//}
+//
+////this.getProjects()
+//
+//def getSubbProjects() {
+//    println "----------------"
+//    println "sub project"
+//    println "----------------"
+//
+//    this.getSubprojects().eachWithIndex {
+//        item, index ->
+//            println "------ project: ${item.name}"
+//    }
+//}
+//
+//getSubbProjects()
+//
+//
+//def getParentsProject() {
+//    def name = this.getParent().name
+//    println "parent project :${name}"
+//}
+////根project没有parent
+////getParentsProject()
+//
+//def getRootPro() {
+//    def name = this.getRootProject().name
+//    println "this root project:%{name}"
+//}
+//
+////操作project,配置指定工程
+//project("lib-ec") { project ->
+////    println project.name
+////    apply plugin: 'com.android.application'
+////    group 'com.skcodestack'
+////    version '1.1.0-realse'
+////    dependencies {
+////
+////    }
+////    android {
+////
+////    }
+//}
+//
+////配置当前和所有子工程
+//allprojects {
+////    group 'com.skcodestack'
+////    version '1.1.0-realse'
+//}
+//
+////配置所有子工程,比如添加到maven仓库
+//subprojects { project ->
+//    if (project.plugins.hasPlugin('com.android.library')) {
+////        apply from: '../publishToMaven.gradle'
+//    }
+//}
+//
+///******************属性*******************/
+//
+//subprojects {
+//    //扩展属性块
+//    ext {
+//        complieVersion = 25
+//    }
+//    //子project调用
+////    this.complieVersion
+//}
+//
+//
+//ext {
+//    complieVersion = 25
+//}
+////子project调用
+////this.rootProject.complieVersion
+////this.complieVersion  根project属下会被子project继承
+//
+////单独文件引入
+//apply from: this.file('common.gradle')
+////子project使用
+////this.rootProject.ext.android.complieSdkVersion
+//
+////第二种，在gradle.properties中定义
+////isModule=true
+////使用
+////isModule.toBoolen()
+//
+///***********************file******************************/
+//
+////路径获取
+////根工程路径
+//this.getRootDir().absolutePath
+////builde文件 path
+//this.getBuildDir().absolutePath
+////当前工程文件
+//this.getProjectDir().absolutePath
+//
+////文件操作
+//
+//def getContent(String path) {
+//    try {
+//        //当前project中开始查找
+//        def file = this.file(path)
+////        this.files()
+//        return file.text
+//    } catch (GradleException ex) {
+//        println "GradleException:${ex.toString()}"
+//    }
+//    return null
+//}
+//
+//
+//println getContent('common.gradle')
+//
+////拷贝
+//
+//copy {
+//    from file("common.gradle")
+//    into getRootProject().getBuildDir()
+//    //不拷贝
+//    exclude {}
+//    //重新命名
+//    rename {}
+//}
+//
+////遍历
+//
+//fileTree('builde/output/apk') {
+//    FileTree tree ->
+//        tree.visit {
+//            FileTreeElement element ->
+//                println "this file name:${element.name}"
+////                copy {
+////                    from file(element.file)
+////                    into   getRootProject().getBuildDir()
+////                }
+//
+//        }
+//}
+//
+///*******************其他*********************/
+//
+////依赖
+//buildscript { ScriptHandler scriptHandler ->
+//    //配置工程【插件】依赖地址(gradle使用到的插件)
+//    scriptHandler.dependencies { DependencyHandler dependencyHandler ->
+//        classpath 'com.android.tools.build:gradle:3.1.4'
+//    }
+//    //配置工程仓库地址
+//    scriptHandler.repositories { RepositoryHandler repositoryHandler ->
+//        repositoryHandler.jcenter()
+//        repositoryHandler.mavenCentral()
+//        repositoryHandler.mavenLocal()
+//        repositoryHandler.ivy {}
+        //私有mavaen仓库
+//        repositoryHandler.maven {
+            //私服地址
+//            url 'http://localhost:8081'
+//            name 'skcodestack'
+//            credentials{
+//                username = 'username'
+//                password = 'pwd'
+//            }
+//        }
+//    }
+//}
+
+//外部命令
+
+//task(name:"apkcopy") {
+//    //gradle执行阶段
+//    doLast {
+//        def sourcePath = this.buildDir.path + '/outputs/apk'
+//        def destPath = 'd:/apk'
+//        def command = "mv -f ${sourcePath} ${destPath}"
+//
+//        exec {
+//            try {
+//                executable 'bash'
+//                args '-c', command
+//                println "the command is success"
+//            } catch (GradleException ex) {
+//                println "the command is error:${ex.toString()}"
+//            }
+//        }
+//    }
+//}

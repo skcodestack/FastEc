@@ -1,0 +1,16 @@
+
+
+ext {
+
+    android = [complieSdkVersion: 25,
+               versionName : '1.0.3',
+               versionCode : '13',
+               versionInfo : 'this is 11,fix D bug']
+
+    dependence = [
+            'libSupportV7': 'com.android.support:appcompat-v7:25.3.1'
+
+    ]
+
+}
+

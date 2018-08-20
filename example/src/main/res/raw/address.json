@@ -1,0 +1,29 @@
+{
+  "code":0,
+  "message":"OK",
+  "data":[
+    {
+      "phone":"111111",
+      "name":"章程",
+      "default":true,
+      "id":1,
+      "address":"江苏南京人民路11号"
+    },
+    {
+      "phone":"22222222",
+      "name":"零四",
+      "default":false,
+      "id":2,
+      "address":"江苏南京人民路12号"
+    },
+    {
+      "phone":"3333333",
+      "name":"王麻子",
+      "default":false,
+      "id":3,
+      "address":"江苏南京人民路13号"
+    }
+
+  ]
+
+}
