@@ -7,6 +7,9 @@ apply plugin: 'gradle-study'
 android {
     compileSdkVersion 25
     buildToolsVersion '27.0.3'
+    //jenkins
+    def apiEnvironment = API_ENVIRONMENT ? API_ENVIRONMENT : project.API_ENVIRONMENT
+
     defaultConfig {
         applicationId "com.skcodestack.fastec"
         minSdkVersion 16
@@ -16,6 +19,7 @@ android {
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [UMENG_CHANNEL_VALUE: "sk"]
+
         ndk {
             //选择要添加的对应cpu类型的.so库。
             abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a'
@@ -27,6 +31,14 @@ android {
                 JPUSH_APPKEY : "8c34ac2abaffca9fd0bf5ac5", //JPush上注册的包名对应的appkey.
                 JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
         ]
+
+        //根据不同的配置，操作
+        switch (apiEnvironment) {
+            case "DEV":
+            case "TEST":
+            case "RELEASE":
+                break
+        }
     }
 
     signingConfigs {
@@ -45,8 +57,9 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
-
+            if (apiEnvironment != "RELEASE") {
+                signingConfig signingConfigs.release
+            }
             //指定我们release包的输出文件名就是我们的渠道名字
             applicationVariants.all { variant ->
                 variant.outputs.all { output ->
@@ -54,9 +67,9 @@ android {
                     if (!variant.buildType.isDebuggable()) {
                         //获取签名的名字 variant.signingConfig.name
                         //要被替换的源字符串
-                        def sourceFile = this.project.name+"-${variant.flavorName}-${variant.buildType.name}"
+                        def sourceFile = this.project.name + "-${variant.flavorName}-${variant.buildType.name}"
                         //替换的字符串
-                        def replaceFile = "${variant.productFlavors[0].name}"+"_V${variant.versionName}_${variant.flavorName}_${variant.buildType.name}"
+                        def replaceFile = "${variant.productFlavors[0].name}" + "_V${variant.versionName}_${variant.flavorName}_${variant.buildType.name}"
                         outputFileName = output.outputFile.name.replace(sourceFile, replaceFile);
                         //遗留问题：如何获取当前module的name，如CodeBooke这个名字怎么获取到
                     }
@@ -72,28 +85,41 @@ android {
     }
     flavorDimensions "default"
     productFlavors {
-        sk {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "sk"]
+        if (apiEnvironment == "RELEASE") {
+            sk {
+                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "sk"]
 //            resValue("string","name","sk")
 //            applicationId
 //            applicationIdSuffix
-            dimension "default"
-        }
+                dimension "default"
+            }
 
-        googlePlayer {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "googlePlayer"]
+            googlePlayer {
+                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "googlePlayer"]
 //            resValue("string","name","googlePlayer")
-            dimension "default"
-        }
-        baidu {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "baidu"]
+                dimension "default"
+            }
+            baidu {
+                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "baidu"]
 //            resValue("string","name","baidu")
-            dimension "default"
+                dimension "default"
+            }
+        } else if (apiEnvironment == "PRO") {
+            official {
+                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "official"]
+                dimension "default"
+            }
+        } else {
+            dev {
+                manifestPlaceholders = [UMENG_CHANNEL_VALUE: "dev"]
+                dimension "default"
+            }
         }
 
         productFlavors.all {
             flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
         }
+
     }
 
     dexOptions {
